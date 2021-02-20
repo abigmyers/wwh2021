@@ -3,30 +3,19 @@ import React from 'react';
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 
 function Result(props) {
-
 	const queueSong = () => {
 		if (props.loggedIn) {
-			const temp = [...props.queue];
-			const temptation = {...props.result};
-			console.log(temp);
-			console.log(temptation);
-			temp.push(temptation);
-			console.log(temp);
-			props.setQueue(temp);
+			props.setQueue([...props.queue, props.result]);
 			props.spotifyApi.queue(props.result.uri);
 		}
-	}
+	};
 
 	return (
 		<Card className="Result" style={{ backgroundColor: '#303330' }}>
 			<CardContent>
 				<Grid container alignItems="center" alignContent="space-between" spacing={2}>
 					<Grid item xs={1}>
-						<img
-							alt="Album Cover"
-							src={props.result.image}
-							style={{ height: '60px', width: '60px' }}
-						/>
+						<img alt="Album Cover" src={props.result.image} style={{ height: '60px', width: '60px' }} />
 					</Grid>
 					<Grid item xs={3}>
 						<Typography variant="h6" color="secondary">
