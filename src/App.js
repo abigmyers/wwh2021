@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Button, Toolbar } from "@material-ui/core/"
+import { Box, Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 
 import Player from './Player.js';
 import Queue from './Queue.js';
+import Header from './Header.js';
 
 import SpotifyWebApi from "spotify-web-api-js";
-import { Typography } from "@material-ui/core";
 const spotifyApi = new SpotifyWebApi();
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +25,7 @@ function App() {
   const classes = useStyles();
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [addingSongs, setAddingSongs] = useState(false);
 
   const getHashParams = () => {
     var hashParams = {};
@@ -60,26 +61,33 @@ function App() {
       })
   }
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            App Name TBD
-          </Typography>
-          {!loggedIn &&
-            <Button variant="outlined" color="inherit" aria-label="login" href="http://localhost:8888" >
-              Login to Spotify
-            </Button>
-          }
-          { loggedIn && <img alt="Avatar" src={user?.images[0].url} style={{height:"50px", width:"50px", borderRadius:"50%"}}></img>}
-
-        </Toolbar>
-      </AppBar>
-      <Player></Player>
-      <Queue></Queue>
-    </div>
-  );
+  if(addingSongs){
+    return (
+      <div className={classes.root}>
+        <Header user={user} classes={classes} loggedIn={loggedIn} />
+        <br/>
+        <Box textAlign="center">
+          <Button variant="contained" color="primary" onClick={() => setAddingSongs(false)}>
+          I'm done adding songs!
+          </Button>
+        </Box>
+      </div>
+    )
+  } else {
+    return (
+      <div className={classes.root}>
+        <Header user={user} classes={classes} loggedIn={loggedIn} />
+        <Player></Player>
+        <Queue></Queue>
+        <br/>
+        <Box textAlign="center">
+          <Button variant="contained" color="primary" onClick={() => setAddingSongs(true)}>
+            Add song to queue
+          </Button>
+        </Box>
+      </div>
+    );
+  }
 }
 
 export default App;

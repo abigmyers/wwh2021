@@ -1,16 +1,36 @@
-import React from "react";
+import React from "react";
 
-import QueueSong from "./QueueSong.js";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 
-function Queue() {
-  return (
-    <div className="Queue">
-        <h1>This is Queue</h1>
-      <QueueSong></QueueSong>
-      <QueueSong></QueueSong>
-      <QueueSong></QueueSong>
-    </div>
-  );
+import QueueSong from "./QueueSong.js";
+
+function Queue() {
+  return (
+    <div className="Queue">
+      <Accordion>
+        <AccordionSummary
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+            <h1>Queue</h1>
+        </AccordionSummary>
+        <AccordionDetails>
+          <QueueSong></QueueSong>
+        </AccordionDetails>
+        <AccordionDetails>
+          <QueueSong></QueueSong>
+        </AccordionDetails>
+        <AccordionDetails>
+          <QueueSong></QueueSong>
+        </AccordionDetails>
+        <AccordionDetails>
+          <QueueSong></QueueSong>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
 }
 
-export default Queue;
+export default Queue;
