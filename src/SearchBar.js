@@ -12,6 +12,8 @@ function SearchBar(props) {
 
 	const handleKey = (event) => {
 		if (event.key === 'Enter') {
+			setSearchTerm(event.target?.value);
+			console.log(searchTerm);
 			search();
 		}
 	};
@@ -19,8 +21,8 @@ function SearchBar(props) {
 	const search = () => {
 		if (props.loggedIn) {
 			props.spotifyApi.searchTracks(searchTerm, { limit: '5' }).then((response) => {
-				setSearchResults(response.tracks);
-				console.log(searchResults);
+				setSearchResults(response.tracks?.items);
+				console.log(response.tracks?.items);
 				setHasSearched(true);
 			});
 		}
