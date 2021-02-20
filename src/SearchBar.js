@@ -3,7 +3,7 @@ import React from "react";
 import { Grid, TextField } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
 
-function SearchBar() {
+function SearchBar(props) {
   return (
     <div className="SearchBar">
       
