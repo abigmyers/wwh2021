@@ -22,7 +22,6 @@ function Player(props) {
 		}
 		if (!upToDate) {
 			setUpToDate(true);
-			console.log("Calling currentSong()")
 			currentSong();
 		}
 	});
@@ -31,7 +30,6 @@ function Player(props) {
 			if (props.loggedIn) {
 				spotifyApi.getMyCurrentPlayingTrack().then((response) => {
 					if (response.is_playing) {
-						console.log("is playing")
 						if (response.progress_ms < currentProgress) {
 							props.setNewSong(true);
 						}
@@ -41,7 +39,6 @@ function Player(props) {
 						setTitle(response.item?.name);
 						setAlbumCover(response.item?.album.images[2].url);
 					} else {
-						console.log("isn't playing")
 						setArtist('No song playing');
 						setCurrentProgress(0);
 						setTitle('No song playing');
@@ -49,7 +46,6 @@ function Player(props) {
 					}
 				});
 			} else {
-				console.log("not logged in")
 				setArtist('No song playing');
 				setTitle('No song playing');
 				setCurrentProgress(0);
