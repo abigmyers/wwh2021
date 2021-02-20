@@ -1,10 +1,49 @@
-import React from "react";
-import Container from '@material-ui/core/Container';
+import React, { useState, useEffect } from "react";
+import SpotifyWebApi from "spotify-web-api-js";
+import { Paper, Typography } from "@material-ui/core";
+
+
+const spotifyApi = new SpotifyWebApi();
 
 function Player() {
+
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
+  const [albumCover, setAlbumCover] = useState(null);
+
+  useEffect(() => {
+    spotifyApi
+      .getMyCurrentPlayingTrack()
+      .then((response) => {
+        setArtist(response.item.artists[0].name);
+        setTitle(response.item.name);
+        setAlbumCover(response.item.album.images[2].url);
+      })
+      currentSong();
+  });
+
+
+  const currentSong = () => {
+    setInterval(() => {spotifyApi
+      .getMyCurrentPlayingTrack()
+      .then((response) => {
+        setArtist(response.item.artists[0].name);
+        setTitle(response.item.name);
+        setAlbumCover(response.item.album.images[2].url);
+      })}, 2000);
+  }
+
   return (
     <div className="Player">
-      <h1>This is Player</h1>
+      <Paper variant="outlined" elevation={2}>
+        <Typography variant="subtitle2">
+          Currently Playing:
+        </Typography>
+        <img src={albumCover} alt="album cover"></img>
+        <Typography variant="body1">
+          {title} by {artist}
+        </Typography>
+      </Paper>
     </div>
   );
 }
