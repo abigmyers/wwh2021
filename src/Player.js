@@ -5,38 +5,48 @@ import { Paper, Typography } from "@material-ui/core";
 
 const spotifyApi = new SpotifyWebApi();
 
-function Player() {
+function Player(props) {
 
-  const [title, setTitle] = useState("");
-  const [artist, setArtist] = useState("");
+  const [title, setTitle] = useState("No song playing");
+  const [artist, setArtist] = useState("No song playing");
   const [albumCover, setAlbumCover] = useState(null);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
 
   useEffect(() => {
-    spotifyApi
-      .getMyCurrentPlayingTrack()
-      .then((response) => {
-        console.log(response);
-        setArtist(response.item?.artists[0].name);
-        setTitle(response.item?.name);
-        setAlbumCover(response.item?.album.images[2].url);
-      })
-      currentSong();
+    if (props.loggedIn) {
+      spotifyApi
+        .getMyCurrentPlayingTrack()
+        .then((response) => {
+          setArtist(response.item?.artists[0].name);
+          setTitle(response.item?.name);
+          setAlbumCover(response.item?.album.images[2].url);
+        })
+    }
+    currentSong();
   });
 
 
   const currentSong = () => {
-    setInterval(() => {spotifyApi
-      .getMyCurrentPlayingTrack()
-      .then((response) => {
-        setArtist(response.item?.artists[0].name);
-        setTitle(response.item?.name);
-        setAlbumCover(response.item?.album.images[2].url);
-      })}, 10000);
+    setInterval(() => {
+      if (props.loggedIn) {
+        spotifyApi
+          .getMyCurrentPlayingTrack()
+        .then((response) => {
+          setCurrentlyPlaying(true);
+          setArtist(response.item?.artists[0].name);
+          setTitle(response.item?.name);
+          setAlbumCover(response.item?.album.images[2].url);
+        })
+      } else {
+        setArtist("No song playing");
+        setTitle("No song playing")
+        setCurrentlyPlaying(false);
+      }}, 10000);
   }
 
   return (
     <div className="Player">
-      <Paper variant="outlined" elevation={2}>
+      {currentlyPlaying && <Paper variant="outlined" elevation={2}>
         <Typography variant="subtitle2">
           Currently Playing:
         </Typography>
@@ -44,7 +54,7 @@ function Player() {
         <Typography variant="body1">
           {title} by {artist}
         </Typography>
-      </Paper>
+      </Paper>}
     </div>
   );
 }
