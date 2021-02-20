@@ -1,31 +1,30 @@
 import React from "react";
 
-import { Grid } from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 
 function QueueSong(props) {
-  	return (
-    	<div className="QueueSong">
-      		<Grid container
-            direction="row"
-            justify="space-around"
-            alignItems="center"
-          >
-        		<Grid item xs={3}>
-					<img src={props.song.image} style={{height:"60px", width:"60px"}} />
-				</Grid>
-				<Grid item xs={3}>
-					<h2>{props.song.title}</h2>
-				</Grid>
-				<Grid item xs={3}>
-					{props.song.artists.map((artist) => (
-						<h2>{artist}</h2>
-					))}
-				</Grid>
-				<Grid item xs={3}>
-					<h2>{props.song.album}</h2>
-				</Grid>
-			</Grid>
-		</div>
+  return (
+    <Paper elevation="3" style={{width: '100%', padding: '10px'}}>
+      <Grid container className="QueueSong"
+        alignItems="center"
+      >
+        <Grid item xs={1}>
+          <img src={props.song.image} style={{height:"60px", width:"60px"}} />
+        </Grid>
+        <Grid item xs={4}>
+          <Typography variant="h6">{props.song.title}</Typography>
+        </Grid>
+        <Grid item xs={4}>
+          {props.song.artists.map((artist) => (
+            <Typography variant="h6">{artist}</Typography>
+          ))}
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="h6">{props.song.album}</Typography>
+        </Grid>
+      </Grid>
+    </Paper>
+    
 	);
 }
 

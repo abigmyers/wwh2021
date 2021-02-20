@@ -1,8 +1,6 @@
 import React from "react";
 
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import {Accordion, AccordionSummary, AccordionDetails, Typography} from '@material-ui/core';
 
 import QueueSong from "./QueueSong.js";
 
@@ -14,7 +12,7 @@ function Queue(props) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-            <h1>Queue</h1>
+          <Typography variant="h3">Queue</Typography>
         </AccordionSummary>
         {props.queue.map((song) => (
           <AccordionDetails>
