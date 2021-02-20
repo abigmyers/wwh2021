@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import Player from './Player.js';
+import Queue from './Queue.js';
+
 import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
 
@@ -34,6 +37,8 @@ function App() {
     <div className="App">
       <a href="http://localhost:8888"> Login to Spotify </a>
       {loggedIn && (<h1>Logged in!</h1>)}
+      <Player></Player>
+      <Queue></Queue>
     </div>
   );
 }
