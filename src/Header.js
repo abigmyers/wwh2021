@@ -17,7 +17,7 @@ function Header(props) {
 
   const logOut = () => {
     props.spotifyApi.setAccessToken(null);
-    window.location.hash = null;
+    window.location = "";
     handleClose();
     props.setLoggedIn(false);
   }
