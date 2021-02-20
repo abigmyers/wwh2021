@@ -70,7 +70,7 @@ function App() {
       <div className={classes.root}>
         <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
         <br/>
-        <SearchBar spotifyApi={spotifyApi}/>
+        <SearchBar spotifyApi={spotifyApi} loggedIn={loggedIn} queue={queue} setQueue={setQueue}/>
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(false)}>
