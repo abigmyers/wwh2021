@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Card, CardContent, Grid } from '@material-ui/core';
+import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
 
 function Result(props) {
 
@@ -11,20 +11,40 @@ function Result(props) {
 	}
 
 	return (
-		<div className="Result">
-			<Card>
-				<CardContent>
-					<Grid container spacing={2}>
-						<Grid item xs>
-							<h3>{props.result.title}</h3>
-						</Grid>
-						<Grid item xs={3}>
-							<Button variant="contained" onClick={queueSong}>Add to Queue</Button>
-						</Grid>
+		<Card className="Result" style={{ backgroundColor: '#303330' }}>
+			<CardContent>
+				<Grid container alignItems="center" alignContent="space-between" spacing={2}>
+					<Grid item xs={1}>
+						<img
+							src={props.result.image}
+							style={{ height: '60px', width: '60px' }}
+						/>
 					</Grid>
-				</CardContent>
-			</Card>
-		</div>
+					<Grid item xs={3}>
+						<Typography variant="h6" color="secondary">
+							{props.result.title}
+						</Typography>
+					</Grid>
+					<Grid item xs={3}>
+						{props.result.artists.map((artist) => (
+							<Typography variant="h6" color="secondary">
+								{artist.name}
+							</Typography>
+						))}
+					</Grid>
+					<Grid item xs={3}>
+						<Typography variant="h6" color="secondary">
+							{props.result.album}
+						</Typography>
+					</Grid>
+					<Grid item xs={2}>
+						<Button variant="contained" color="primary">
+							Add to Queue
+						</Button>
+					</Grid>
+				</Grid>
+			</CardContent>
+		</Card>
 	);
 }
 
