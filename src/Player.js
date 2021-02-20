@@ -9,6 +9,7 @@ function Player(props) {
 	const [artist, setArtist] = useState('No song playing');
 	const [albumCover, setAlbumCover] = useState(null);
 	const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
+	const [currentProgress, setCurrentProgress] = useState(0);
 
 	useEffect(() => {
 		if (props.loggedIn) {
@@ -16,6 +17,7 @@ function Player(props) {
 				if (response.is_playing) {
 					setCurrentlyPlaying(true);
 					setArtist(response.item?.artists[0].name);
+					setCurrentProgress(response.progress_ms);
 					setTitle(response.item?.name);
 					setAlbumCover(response.item?.album.images[2].url);
 				}
@@ -29,12 +31,17 @@ function Player(props) {
 			if (props.loggedIn) {
 				spotifyApi.getMyCurrentPlayingTrack().then((response) => {
 					if (response.is_playing) {
+						if (response.progress_ms < currentProgress) {
+							props.setNewSong(true);
+						}
 						setCurrentlyPlaying(true);
 						setArtist(response.item?.artists[0].name);
+						setCurrentProgress(response.progress_ms);
 						setTitle(response.item?.name);
 						setAlbumCover(response.item?.album.images[2].url);
 					} else {
 						setArtist('No song playing');
+						setCurrentProgress(0);
 						setTitle('No song playing');
 						setCurrentlyPlaying(false);
 					}
@@ -42,6 +49,7 @@ function Player(props) {
 			} else {
 				setArtist('No song playing');
 				setTitle('No song playing');
+				setCurrentProgress(0);
 				setCurrentlyPlaying(false);
 			}
 		}, 10000);

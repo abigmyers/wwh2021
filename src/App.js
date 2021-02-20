@@ -31,6 +31,7 @@ function App() {
     {title: 'Can\'t Stop Singing', artists: ['Ross Lynch', 'Maia Mitchell'], album: 'Teen Beach Movie', image: 'https://i.scdn.co/image/ab67616d0000b2738f9a38eaef72352da716ccdb'},
     {title: 'Jungle', artists: ['Hotel Mira'], album: 'Perfectionism', image: 'https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/33/61/91/336191ad-085f-c510-a870-976e1723d0b6/source/450x450bb.jpg'}
   ]);
+  const [newSong, setNewSong] = useState(false);
 
   const getHashParams = () => {
     var hashParams = {};
@@ -83,7 +84,7 @@ function App() {
     return (
       <div className={classes.root}>
         <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
-        <Player loggedIn={loggedIn} />
+        <Player loggedIn={loggedIn} setNewSong={setNewSong} />
         <Queue queue={queue} />
         <br/>
         <Box textAlign="center">
