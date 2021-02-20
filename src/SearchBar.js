@@ -1,20 +1,31 @@
 import React from "react";
 
-import { Grid, TextField } from "@material-ui/core";
+import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 function SearchBar() {
   return (
-    <div className="SearchBar">
+    <div className="SearchBar" style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
+
+    <Container maxWidth="sm">
+      <FormControl fullWidth>
+      <TextField
+      id="standard-name"
+      label="Search"
+      InputProps={{startAdornment: <SearchIcon />, endAdornment: <Button variant="contained">Search</Button>}}
+    />
+      </FormControl>
+    </Container>
+    
+    
       
-      <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <SearchIcon />
-          </Grid>
-          <Grid item>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-          </Grid>
-        </Grid>
     </div>
   );
 }
