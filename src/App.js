@@ -67,7 +67,7 @@ function App() {
       <div className={classes.root}>
         <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
         <br/>
-        <SearchBar />
+        <SearchBar spotifyApi={spotifyApi}/>
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(false)}>

@@ -17,9 +17,12 @@ function Player(props) {
       spotifyApi
         .getMyCurrentPlayingTrack()
         .then((response) => {
-          setArtist(response.item?.artists[0].name);
-          setTitle(response.item?.name);
-          setAlbumCover(response.item?.album.images[2].url);
+          if (response.is_playing) {
+            setCurrentlyPlaying(true);
+            setArtist(response.item?.artists[0].name);
+            setTitle(response.item?.name);
+            setAlbumCover(response.item?.album.images[2].url);
+          }
         })
     }
     currentSong();
@@ -31,17 +34,24 @@ function Player(props) {
       if (props.loggedIn) {
         spotifyApi
           .getMyCurrentPlayingTrack()
-        .then((response) => {
-          setCurrentlyPlaying(true);
-          setArtist(response.item?.artists[0].name);
-          setTitle(response.item?.name);
-          setAlbumCover(response.item?.album.images[2].url);
-        })
+          .then((response) => {
+            if (response.is_playing) {
+              setCurrentlyPlaying(true);
+              setArtist(response.item?.artists[0].name);
+              setTitle(response.item?.name);
+              setAlbumCover(response.item?.album.images[2].url);
+            } else {
+              setArtist("No song playing");
+              setTitle("No song playing")
+              setCurrentlyPlaying(false);
+            }
+          })
       } else {
         setArtist("No song playing");
         setTitle("No song playing")
         setCurrentlyPlaying(false);
-      }}, 10000);
+      }
+    }, 10000);
   }
 
   return (
