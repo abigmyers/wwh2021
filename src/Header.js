@@ -30,7 +30,7 @@ function Header(props) {
             App Name TBD
             </Typography>
           {!props.loggedIn &&
-            <Button variant="outlined" color="inherit" aria-label="login" href="http://localhost:8888" >
+            <Button variant="outlined" color="secondary" aria-label="login" href="http://localhost:8888" >
               Login to Spotify
               </Button>
           }
