@@ -27,6 +27,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [addingSongs, setAddingSongs] = useState(false);
+  const [queue, setQueue] = useState([
+    {title: 'Can\'t Stop Singing', artists: ['Ross Lynch', 'Maia Mitchell'], album: 'Teen Beach Movie', image: 'https://i.scdn.co/image/ab67616d0000b2738f9a38eaef72352da716ccdb'},
+    {title: 'Jungle', artists: ['Hotel Mira'], album: 'Perfectionism', image: 'https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/33/61/91/336191ad-085f-c510-a870-976e1723d0b6/source/450x450bb.jpg'}
+  ]);
 
   const getHashParams = () => {
     var hashParams = {};
@@ -57,17 +61,16 @@ function App() {
     spotifyApi
       .getMe()
       .then((response) => {
-        console.log("ran")
         setUser(response);
-      })
+      });
   }
 
   if(addingSongs){
     return (
       <div className={classes.root}>
-        <Header user={user} classes={classes} loggedIn={loggedIn} />
+        <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
         <br/>
-        <SearchBar />
+        <SearchBar spotifyApi={spotifyApi}/>
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(false)}>
@@ -79,9 +82,9 @@ function App() {
   } else {
     return (
       <div className={classes.root}>
-        <Header user={user} classes={classes} loggedIn={loggedIn} />
-        <Player></Player>
-        <Queue></Queue>
+        <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
+        <Player loggedIn={loggedIn} />
+        <Queue queue={queue} />
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(true)}>
