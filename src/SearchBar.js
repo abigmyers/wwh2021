@@ -21,11 +21,11 @@ function SearchBar(props) {
 		if (props.loggedIn) {
 			props.spotifyApi.searchTracks(searchTerm, { limit: '5' }).then((response) => {
 				setSearchResults([
-					{ title: response.tracks.items[0]?.name, artists: response.tracks.items[0]?.artists[0].name, album: response.tracks.items[0]?.album.name, image: response.tracks.items[0]?.album.images[2].url, id: response.tracks.items[0]?.id },
-					{ title: response.tracks.items[1]?.name, artists: response.tracks.items[1]?.artists[0].name, album: response.tracks.items[1]?.album.name, image: response.tracks.items[1]?.album.images[2].url, id: response.tracks.items[1]?.id },
-					{ title: response.tracks.items[2]?.name, artists: response.tracks.items[2]?.artists[0].name, album: response.tracks.items[2]?.album.name, image: response.tracks.items[2]?.album.images[2].url, id: response.tracks.items[2]?.id },
-					{ title: response.tracks.items[3]?.name, artists: response.tracks.items[3]?.artists[0].name, album: response.tracks.items[3]?.album.name, image: response.tracks.items[3]?.album.images[2].url, id: response.tracks.items[3]?.id },
-					{ title: response.tracks.items[4]?.name, artists: response.tracks.items[4]?.artists[0].name, album: response.tracks.items[4]?.album.name, image: response.tracks.items[4]?.album.images[2].url, id: response.tracks.items[4]?.id }
+					{ title: response.tracks.items[0]?.name, artists: response.tracks.items[0]?.artists, album: response.tracks.items[0]?.album.name, image: response.tracks.items[0]?.album.images[2].url, id: response.tracks.items[0]?.id },
+					{ title: response.tracks.items[1]?.name, artists: response.tracks.items[1]?.artists, album: response.tracks.items[1]?.album.name, image: response.tracks.items[1]?.album.images[2].url, id: response.tracks.items[1]?.id },
+					{ title: response.tracks.items[2]?.name, artists: response.tracks.items[2]?.artists, album: response.tracks.items[2]?.album.name, image: response.tracks.items[2]?.album.images[2].url, id: response.tracks.items[2]?.id },
+					{ title: response.tracks.items[3]?.name, artists: response.tracks.items[3]?.artists, album: response.tracks.items[3]?.album.name, image: response.tracks.items[3]?.album.images[2].url, id: response.tracks.items[3]?.id },
+					{ title: response.tracks.items[4]?.name, artists: response.tracks.items[4]?.artists, album: response.tracks.items[4]?.album.name, image: response.tracks.items[4]?.album.images[2].url, id: response.tracks.items[4]?.id }
 				]);
 				
 				setHasSearched(true);
@@ -42,8 +42,10 @@ function SearchBar(props) {
 			<Container maxWidth="sm">
 				<FormControl fullWidth>
 					<TextField
-						id="standard-name"
+            id="filled-basic"
+            variant="filled"
 						label="Search"
+            color="primary"
 						onKeyPress={handleKey}
 						onChange={handleChange}
 						InputProps={{
@@ -52,8 +54,9 @@ function SearchBar(props) {
 								<Button variant="contained" onClick={search}>
 									Search
 								</Button>
-							),
+							)
 						}}
+            style={{background: "#ffffff"}}
 					/>
 				</FormControl>
 			</Container>
