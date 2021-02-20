@@ -10,27 +10,28 @@ function Player(props) {
 	const [albumCover, setAlbumCover] = useState(null);
 	const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
 	const [currentProgress, setCurrentProgress] = useState(0);
+	const [upToDate, setUpToDate] = useState(false);
+	const [firstLoad, setFirstLoad] = useState(true)
+
+	
 
 	useEffect(() => {
-		if (props.loggedIn) {
-			spotifyApi.getMyCurrentPlayingTrack().then((response) => {
-				if (response.is_playing) {
-					setCurrentlyPlaying(true);
-					setArtist(response.item?.artists[0].name);
-					setCurrentProgress(response.progress_ms);
-					setTitle(response.item?.name);
-					setAlbumCover(response.item?.album.images[2].url);
-				}
-			});
+		if (firstLoad) {
+			setFirstLoad(false);
+			setInterval(() => setUpToDate(false), 10000);
 		}
-		currentSong();
+		if (!upToDate) {
+			setUpToDate(true);
+			console.log("Calling currentSong()")
+			currentSong();
+		}
 	});
 
-	const currentSong = () => {
-		setInterval(() => {
+	const currentSong = () => {		
 			if (props.loggedIn) {
 				spotifyApi.getMyCurrentPlayingTrack().then((response) => {
 					if (response.is_playing) {
+						console.log("is playing")
 						if (response.progress_ms < currentProgress) {
 							props.setNewSong(true);
 						}
@@ -40,6 +41,7 @@ function Player(props) {
 						setTitle(response.item?.name);
 						setAlbumCover(response.item?.album.images[2].url);
 					} else {
+						console.log("isn't playing")
 						setArtist('No song playing');
 						setCurrentProgress(0);
 						setTitle('No song playing');
@@ -47,12 +49,12 @@ function Player(props) {
 					}
 				});
 			} else {
+				console.log("not logged in")
 				setArtist('No song playing');
 				setTitle('No song playing');
 				setCurrentProgress(0);
 				setCurrentlyPlaying(false);
-			}
-		}, 10000);
+			}			
 	};
 
 	return (

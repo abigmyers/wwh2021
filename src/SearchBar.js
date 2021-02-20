@@ -21,11 +21,11 @@ function SearchBar(props) {
 		if (props.loggedIn) {
 			props.spotifyApi.searchTracks(searchTerm, { limit: '5' }).then((response) => {
 				setSearchResults([
-					{ title: response.tracks.items[0]?.name, artists: response.tracks.items[0]?.artists[0].name, album: response.tracks.items[0]?.album.name, image: response.tracks.items[0]?.album.images[2].url, id: response.tracks.items[0]?.id },
-					{ title: response.tracks.items[1]?.name, artists: response.tracks.items[1]?.artists[0].name, album: response.tracks.items[1]?.album.name, image: response.tracks.items[1]?.album.images[2].url, id: response.tracks.items[1]?.id },
-					{ title: response.tracks.items[2]?.name, artists: response.tracks.items[2]?.artists[0].name, album: response.tracks.items[2]?.album.name, image: response.tracks.items[2]?.album.images[2].url, id: response.tracks.items[2]?.id },
-					{ title: response.tracks.items[3]?.name, artists: response.tracks.items[3]?.artists[0].name, album: response.tracks.items[3]?.album.name, image: response.tracks.items[3]?.album.images[2].url, id: response.tracks.items[3]?.id },
-					{ title: response.tracks.items[4]?.name, artists: response.tracks.items[4]?.artists[0].name, album: response.tracks.items[4]?.album.name, image: response.tracks.items[4]?.album.images[2].url, id: response.tracks.items[4]?.id }
+					{ title: response.tracks.items[0]?.name, artists: response.tracks.items[0]?.artists[0].name, album: response.tracks.items[0]?.album.name, image: response.tracks.items[0]?.album.images[2].url, uri: response.tracks.items[0]?.uri },
+					{ title: response.tracks.items[1]?.name, artists: response.tracks.items[1]?.artists[0].name, album: response.tracks.items[1]?.album.name, image: response.tracks.items[1]?.album.images[2].url, uri: response.tracks.items[1]?.uri },
+					{ title: response.tracks.items[2]?.name, artists: response.tracks.items[2]?.artists[0].name, album: response.tracks.items[2]?.album.name, image: response.tracks.items[2]?.album.images[2].url, uri: response.tracks.items[2]?.uri },
+					{ title: response.tracks.items[3]?.name, artists: response.tracks.items[3]?.artists[0].name, album: response.tracks.items[3]?.album.name, image: response.tracks.items[3]?.album.images[2].url, uri: response.tracks.items[3]?.uri },
+					{ title: response.tracks.items[4]?.name, artists: response.tracks.items[4]?.artists[0].name, album: response.tracks.items[4]?.album.name, image: response.tracks.items[4]?.album.images[2].url, uri: response.tracks.items[4]?.uri }
 				]);
 				
 				setHasSearched(true);
@@ -64,7 +64,8 @@ function SearchBar(props) {
 					/>
 				</FormControl>
 			</Container>
-			{hasSearched && searchResults.map((result) => <Result result={result} />)}
+			{hasSearched && searchResults.map((result) => 
+			<Result result={result} spotifyApi={props.spotifyApi} loggedIn={props.loggedIn} queue={props.queue} setQueue={props.setQueue} />)}
 		</div>
 	);
 }
