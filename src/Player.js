@@ -15,9 +15,9 @@ function Player() {
     spotifyApi
       .getMyCurrentPlayingTrack()
       .then((response) => {
-        setArtist(response.item.artists[0].name);
-        setTitle(response.item.name);
-        setAlbumCover(response.item.album.images[2].url);
+        setArtist(response.item?.artists[0].name);
+        setTitle(response.item?.name);
+        setAlbumCover(response.item?.album.images[2].url);
       })
       currentSong();
   });
@@ -27,10 +27,10 @@ function Player() {
     setInterval(() => {spotifyApi
       .getMyCurrentPlayingTrack()
       .then((response) => {
-        setArtist(response.item.artists[0].name);
-        setTitle(response.item.name);
-        setAlbumCover(response.item.album.images[2].url);
-      })}, 2000);
+        setArtist(response.item?.artists[0].name);
+        setTitle(response.item?.name);
+        setAlbumCover(response.item?.album.images[2].url);
+      })}, 10000);
   }
 
   return (
