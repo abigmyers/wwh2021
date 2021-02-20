@@ -15,6 +15,7 @@ function Player() {
     spotifyApi
       .getMyCurrentPlayingTrack()
       .then((response) => {
+        console.log(response);
         setArtist(response.item?.artists[0].name);
         setTitle(response.item?.name);
         setAlbumCover(response.item?.album.images[2].url);

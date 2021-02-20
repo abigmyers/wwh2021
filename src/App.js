@@ -27,6 +27,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [addingSongs, setAddingSongs] = useState(false);
+  const [queue, setQueue] = useState([{title: 'Title', artists: ['Artist'], album: 'Album', image: 'https://i.scdn.co/image/ab67616d0000b2738f9a38eaef72352da716ccdb'}]);
 
   const getHashParams = () => {
     var hashParams = {};
@@ -59,7 +60,7 @@ function App() {
       .then((response) => {
         console.log("ran")
         setUser(response);
-      })
+      });
   }
 
   if(addingSongs){
@@ -80,8 +81,8 @@ function App() {
     return (
       <div className={classes.root}>
         <Header user={user} classes={classes} loggedIn={loggedIn} />
-        <Player></Player>
-        <Queue></Queue>
+        <Player />
+        <Queue queue={queue} />
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(true)}>

@@ -6,7 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 
 import QueueSong from "./QueueSong.js";
 
-function Queue() {
+function Queue(props) {
   return (
     <div className="Queue">
       <Accordion>
@@ -16,18 +16,11 @@ function Queue() {
         >
             <h1>Queue</h1>
         </AccordionSummary>
-        <AccordionDetails>
-          <QueueSong></QueueSong>
-        </AccordionDetails>
-        <AccordionDetails>
-          <QueueSong></QueueSong>
-        </AccordionDetails>
-        <AccordionDetails>
-          <QueueSong></QueueSong>
-        </AccordionDetails>
-        <AccordionDetails>
-          <QueueSong></QueueSong>
-        </AccordionDetails>
+        {props.queue.map((song) => (
+          <AccordionDetails>
+            <QueueSong song={song} />
+          </AccordionDetails>
+        ))}
       </Accordion>
     </div>
   );
