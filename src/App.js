@@ -56,7 +56,6 @@ function App() {
     spotifyApi
       .getMe()
       .then((response) => {
-        console.log("ran")
         setUser(response);
       })
   }
@@ -64,7 +63,7 @@ function App() {
   if(addingSongs){
     return (
       <div className={classes.root}>
-        <Header user={user} classes={classes} loggedIn={loggedIn} />
+        <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(false)}>
@@ -76,8 +75,8 @@ function App() {
   } else {
     return (
       <div className={classes.root}>
-        <Header user={user} classes={classes} loggedIn={loggedIn} />
-        <Player></Player>
+        <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
+        <Player loggedIn={loggedIn}></Player>
         <Queue></Queue>
         <br/>
         <Box textAlign="center">

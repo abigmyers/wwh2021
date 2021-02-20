@@ -5,26 +5,28 @@ import { Paper, Typography } from "@material-ui/core";
 
 const spotifyApi = new SpotifyWebApi();
 
-function Player() {
+function Player(props) {
 
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [albumCover, setAlbumCover] = useState(null);
 
   useEffect(() => {
-    spotifyApi
-      .getMyCurrentPlayingTrack()
-      .then((response) => {
-        setArtist(response.item?.artists[0].name);
-        setTitle(response.item?.name);
-        setAlbumCover(response.item?.album.images[2].url);
-      })
+    if (!props.loggedIn) {
+      spotifyApi
+        .getMyCurrentPlayingTrack()
+        .then((response) => {
+          setArtist(response.item?.artists[0].name);
+          setTitle(response.item?.name);
+          setAlbumCover(response.item?.album.images[2].url);
+        })
+      }
       currentSong();
   });
 
 
   const currentSong = () => {
-    setInterval(() => {spotifyApi
+    setInterval(() => {props.loggedIn && spotifyApi
       .getMyCurrentPlayingTrack()
       .then((response) => {
         setArtist(response.item?.artists[0].name);
