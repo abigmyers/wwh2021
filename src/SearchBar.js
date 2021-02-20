@@ -33,14 +33,7 @@ function SearchBar(props) {
 	};
 
 	return (
-		<div
-			className="SearchBar"
-			style={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}
-		>
+		<div className="SearchBar">
 			<Container maxWidth="sm">
 				<FormControl fullWidth>
 					<TextField
@@ -59,7 +52,14 @@ function SearchBar(props) {
 					/>
 				</FormControl>
 			</Container>
-			{hasSearched && searchResults.map((result) => <Result result={result} />)}
+			<br />
+			{hasSearched && (
+				<Container>
+					{searchResults.map((result) => (
+						<Result result={result} />
+					))}
+				</Container>
+			)}
 		</div>
 	);
 }
