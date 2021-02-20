@@ -78,7 +78,7 @@ function App() {
           </Button>
         </Box>
       </div>
-    )
+    );
   } else {
     return (
       <div className={classes.root}>

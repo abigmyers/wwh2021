@@ -7,12 +7,12 @@ import QueueSong from "./QueueSong.js";
 function Queue(props) {
   return (
     <div className="Queue">
-      <Accordion>
+      <Accordion style={{backgroundColor: '#222222'}}>
         <AccordionSummary
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant="h3">Queue</Typography>
+          <Typography variant="h3" color="secondary">Queue</Typography>
         </AccordionSummary>
         {props.queue.map((song) => (
           <AccordionDetails>
