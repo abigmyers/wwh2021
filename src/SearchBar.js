@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-import { FormControl, Container, Button, TextField, Card, CardContent } from '@material-ui/core';
+import Result from './Result';
+
+import { FormControl, Container, Button, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 function SearchBar(props) {
-  const [hasSearched, setHasSearched] = useState(false);
+	const [hasSearched, setHasSearched] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState(undefined);
 
@@ -19,7 +21,7 @@ function SearchBar(props) {
 			props.spotifyApi.searchTracks(searchTerm, { limit: '5' }).then((response) => {
 				setSearchResults(response.tracks);
 				console.log(searchResults);
-        setHasSearched(true);
+				setHasSearched(true);
 			});
 		}
 	};
@@ -55,6 +57,7 @@ function SearchBar(props) {
 					/>
 				</FormControl>
 			</Container>
+			{hasSearched && searchResults.map((result) => <Result result={result} />)}
 		</div>
 	);
 }
