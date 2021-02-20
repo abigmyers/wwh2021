@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Player from './Player.js';
 import Queue from './Queue.js';
 import Header from './Header.js';
+import SearchBar from './SearchBar.js';
 
 import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
@@ -64,6 +65,8 @@ function App() {
     return (
       <div className={classes.root}>
         <Header user={user} classes={classes} loggedIn={loggedIn} setLoggedIn={setLoggedIn} spotifyApi={spotifyApi} />
+        <br/>
+        <SearchBar />
         <br/>
         <Box textAlign="center">
           <Button variant="contained" color="primary" onClick={() => setAddingSongs(false)}>
