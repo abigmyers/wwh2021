@@ -9,18 +9,18 @@ function QueueSong(props) {
         alignItems="center"
       >
         <Grid item xs={1}>
-          <img src={props.song.image} style={{height:"60px", width:"60px"}} />
+          <img src={props.song?.image} style={{height:"60px", width:"60px"}} />
         </Grid>
         <Grid item xs={4}>
-          <Typography variant="h6" color="secondary">{props.song.title}</Typography>
+          <Typography variant="h6" color="secondary">{props.song?.title}</Typography>
         </Grid>
         <Grid item xs={4}>
-          {props.song.artists.map((artist) => (
+          {props.song?.artists?.map((artist) => (
             <Typography variant="h6" color="secondary">{artist}</Typography>
           ))}
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="h6" color="secondary">{props.song.album}</Typography>
+          <Typography variant="h6" color="secondary">{props.song?.album}</Typography>
         </Grid>
       </Grid>
     </Paper>

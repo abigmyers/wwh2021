@@ -6,6 +6,13 @@ function Result(props) {
 
 	const queueSong = () => {
 		if (props.loggedIn) {
+			const temp = [...props.queue];
+			const temptation = {...props.result};
+			console.log(temp);
+			console.log(temptation);
+			temp.push(temptation);
+			console.log(temp);
+			props.setQueue(temp);
 			props.spotifyApi.queue(props.result.uri);
 		}
 	}
@@ -16,6 +23,7 @@ function Result(props) {
 				<Grid container alignItems="center" alignContent="space-between" spacing={2}>
 					<Grid item xs={1}>
 						<img
+							alt="Album Cover"
 							src={props.result.image}
 							style={{ height: '60px', width: '60px' }}
 						/>
@@ -38,7 +46,7 @@ function Result(props) {
 						</Typography>
 					</Grid>
 					<Grid item xs={2}>
-						<Button variant="contained" color="primary">
+						<Button variant="contained" color="primary" onClick={queueSong}>
 							Add to Queue
 						</Button>
 					</Grid>
