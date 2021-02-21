@@ -53,6 +53,10 @@ function App() {
 				getUser();
 			}
 		}
+		if(newSong) {
+			setNewSong(false);
+			setQueue(queue.slice(1));
+		}
 	});
 
 	const getUser = () => {
@@ -79,6 +83,7 @@ function App() {
 						I'm done adding songs!
 					</Button>
 				</Box>
+				<br />
 			</div>
 		);
 	} else {
@@ -99,6 +104,7 @@ function App() {
 						Add song to queue
 					</Button>
 				</Box>
+				<br />
 			</div>
 		);
 	}

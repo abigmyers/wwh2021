@@ -7,7 +7,7 @@ const spotifyApi = new SpotifyWebApi();
 
 function Player(props) {
 	const [title, setTitle] = useState('No song playing');
-	const [artist, setArtist] = useState('No song playing');
+	const [artist, setArtist] = useState([]);
 	const [albumCover, setAlbumCover] = useState(null);
 	const [album, setAlbum] = useState('No album');
 	const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
@@ -30,17 +30,24 @@ function Player(props) {
 		if (props.loggedIn) {
 			spotifyApi.getMyCurrentPlayingTrack().then((response) => {
 				if (response.is_playing) {
+					console.log(response)
 					if (response.progress_ms < currentProgress) {
 						props.setNewSong(true);
 					}
 					setCurrentlyPlaying(true);
-					setArtist(response.item?.artists[0].name);
+
+					const tempA = [];
+					response.item?.artists.map(a => {
+						tempA.push(a.name);
+					});
+					setArtist([...tempA]);
+
 					setCurrentProgress(response.progress_ms);
 					setTitle(response.item?.name);
 					setAlbum(response.item?.album.name);
 					setAlbumCover(response.item?.album.images[1].url);
 				} else {
-					setArtist('No song playing');
+					setArtist([]);
 					setCurrentProgress(0);
 					setTitle('No song playing');
 					setAlbum('No album');
@@ -48,7 +55,7 @@ function Player(props) {
 				}
 			});
 		} else {
-			setArtist('No song playing');
+			setArtist([]);
 			setTitle('No song playing');
 			setAlbum('No album');
 			setCurrentProgress(0);
@@ -85,7 +92,7 @@ function Player(props) {
 								style={{ margin: '10%', height: '100px', paddingLeft: '5px' }}
 							></img>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={10}>
 							<Typography variant="body1" style={{ WebkitTextFillColor: 'white', margin: '2%' }}>
 								<b style={{ WebkitTextFillColor: '#1ed760' }}>Title:</b> {title}
 							</Typography>
@@ -93,7 +100,7 @@ function Player(props) {
 								<b style={{ WebkitTextFillColor: '#1ed760' }}>Album:</b> {album}
 							</Typography>
 							<Typography variant="body1" style={{ WebkitTextFillColor: 'white', margin: '2%' }}>
-								<b style={{ WebkitTextFillColor: '#1ed760' }}>Artist:</b> {artist}
+								<b style={{ WebkitTextFillColor: '#1ed760' }}>Artist:</b> {artist[0]}{artist.slice(1).map((a) => ", " + a)}
 							</Typography>
 						</Grid>
 					</Grid>
