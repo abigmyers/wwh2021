@@ -81,19 +81,19 @@ function SearchBar(props) {
 				<FormControl fullWidth>
 					<TextField
 						id="filled-basic"
-						variant="filled"
+						variant="outlined"
 						color="primary"
 						onKeyPress={handleKey}
 						onChange={handleChange}
-						InputProps={{
-							startAdornment: <SearchIcon />,
+						InputProps={{  
+							startAdornment: <SearchIcon style={{color:"#1ed760"}}/>,
 							endAdornment: (
 								<Button variant="contained" color="primary" onClick={search}>
 									Search
 								</Button>
 							),
 						}}
-						style={{ background: '#ffffff' }}
+						style={{ background: '#ffffff'}}
 					/>
 				</FormControl>
 			</Container>
