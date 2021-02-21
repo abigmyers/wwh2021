@@ -13,14 +13,36 @@
         white-space: nowrap;
         width: 500px;
       }
+
+      .btn-primary, .btn-default{
+        background-color: #1ed760;
+        color: #191414;
+        height: 75px;
+        width: 200px;
+        margin-top: 10%;
+        margin-left: 40%;
+        font-size: 20px;
+        text-align: center;
+        vertical-align: center;
+        padding: 20px 0;
+        border-color: #191414;
+      }
+
+      .center {
+        padding: 100px;
+        text-align: center;
+      }
+
     </style>
   </head>
 
-  <body>
+  <body style="background-color:#191414">
     <div class="container">
       <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <div class="center">
+          <h1>Login to Spotify to Continue</h1>
+        </div>
+        <a href="/login" class="btn btn-primary">Log in</a>
       </div>
       <div id="loggedin">
         <div id="user-profile">
