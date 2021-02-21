@@ -25,8 +25,8 @@ function Header(props) {
 		<div className="Header">
 			<AppBar position="static" color="primary">
 				<Toolbar>
-					<Typography variant="h6" className={props.classes.title}>
-						Spotify Jukebox
+					<Typography variant="h5" className={props.classes.title}>
+						<b>Spotify Jukebox</b>
 					</Typography>
 					{!props.loggedIn && (
 						<Button variant="outlined" color="secondary" aria-label="login" href="http://localhost:8888">

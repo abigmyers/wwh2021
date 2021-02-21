@@ -80,7 +80,7 @@ function SearchBar(props) {
 						InputProps={{
 							startAdornment: <SearchIcon />,
 							endAdornment: (
-								<Button variant="contained" onClick={search}>
+								<Button variant="contained" color="primary" onClick={search}>
 									Search
 								</Button>
 							),
