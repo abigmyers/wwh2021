@@ -1,3 +1,5 @@
+const data = require('./spotifyData.json');
+
 const getAuthCode = async () => {
     const url = "https://accounts.spotify.com/authorize";
     const authCode = "";
@@ -5,7 +7,7 @@ const getAuthCode = async () => {
     await fetch(
       url +
         new URLSearchParams({
-          client_id: "d6556825427049c48a53aa561f582fd2",
+          client_id: data.client_id,
           response_type: "code",
           redirect_uri: "http://localhost:8888/callback",
           scope: "playlist-read-private",
@@ -32,8 +34,8 @@ const getAuthCode = async () => {
         grant_type: "authorization_code",
         code: authCode,
         redirect_uri: "http://localhost:8888/callback",
-        client_id: "d6556825427049c48a53aa561f582fd2",
-        client_secret: "34fc0f48ba974b30b8c7bb2388b4a149",
+        client_id: data.client_id,
+        client_secret: data.client_secret,
       }),
     })
       .then((response) => response.json())
